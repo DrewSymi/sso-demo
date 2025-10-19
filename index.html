@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Access Control • Secure — SSO Flow (Interactive Demo)</title>
-  <meta name="description" content="Interactive SSO simulation with real TOTP, signed JWT (HS256), claim highlights, and an audit trail — designed for IAM/PAM portfolios." />
+  <meta name="description" content="Interactive SSO simulation with real TOTP, signed JWT (HS256), claim highlights, policy checks, vendor theme switcher, and an audit trail — designed for IAM/PAM portfolios." />
+  <meta property="og:title" content="Enterprise SSO Demo — Access Control • Secure">
+  <meta property="og:description" content="Credentials → TOTP → Signed JWT → Redirect. Client-only, educational.">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ctext y='56' x='6' font-size='56'%3E%F0%9F%94%90%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -18,9 +21,20 @@
       </div>
     </div>
     <div class="actions-top">
+      <select id="vendor-theme" class="btn ghost" aria-label="Vendor theme">
+        <option value="base">Enterprise (Base)</option>
+        <option value="entra">Microsoft Entra</option>
+        <option value="okta">Okta</option>
+        <option value="ping">Ping Identity</option>
+        <option value="cyberark">CyberArk</option>
+        <option value="beyondtrust">BeyondTrust</option>
+        <option value="duo">Duo</option>
+        <option value="aws">AWS IAM</option>
+        <option value="gcp">Google Cloud IAM</option>
+      </select>
       <button id="btn-theme" class="btn ghost" aria-pressed="false" title="Toggle theme">🌙 Theme</button>
       <a class="btn link" href="https://asymister.notion.site/Access-Control-Secure-The-IAM-Portfolio-291c2c11a0eb80feabc0db8eeba0c4fc" target="_blank" rel="noopener">Portfolio</a>
-      <a class="btn link" href="https://github.com/andrew-symister" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn link" href="https://github.com/drewsymi" target="_blank" rel="noopener">GitHub</a>
       <a class="btn link" href="https://linkedin.com/in/andrewsymister" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </header>
@@ -60,7 +74,7 @@
       <!-- Step 2 -->
       <section id="step-2" class="panel" aria-labelledby="h2">
         <h2 id="h2">Step 2 — MFA Challenge (TOTP)</h2>
-        <p class="hint">Enter the current 6‑digit code. It rotates every 30s.</p>
+        <p class="hint">Enter the current 6-digit code. It rotates every 30s.</p>
         <div class="totp">
           <div class="codebox">
             <code id="mfa-code" class="code">000000</code>
@@ -139,14 +153,14 @@
       <div class="card">
         <h3>Mapped controls</h3>
         <ul class="dash small">
-          <li>NIST 800‑53: AC‑2, AC‑6, IA‑2, IA‑5</li>
+          <li>NIST 800-53: AC-2, AC-6, IA-2, IA-5</li>
           <li>ISO 27001: A.9 (Access Control)</li>
           <li>Zero Trust: Verify explicitly (MFA, claims)</li>
         </ul>
       </div>
       <div class="card">
         <h3>Audit trail (local)</h3>
-        <pre id="audit" class="audit" aria-label="Audit events"></pre>
+        <pre id="audit" class="audit" aria-label="Audit events">[]</pre>
         <button id="btn-audit" class="btn ghost">Download audit.json</button>
       </div>
     </aside>
@@ -159,3 +173,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
